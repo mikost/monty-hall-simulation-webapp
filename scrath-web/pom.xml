@@ -12,4 +12,14 @@
 
   <artifactId>scrath-web</artifactId>
   <packaging>war</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+	<artifactId>maven-war-plugin</artifactId>
+        <version>${version.war.plugin}</version>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>

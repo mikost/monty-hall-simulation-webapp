@@ -10,8 +10,13 @@
   <packaging>pom</packaging>
 
   <properties>
-    <version.war.plugin>2.2</version.war.plugin>
+    <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+    <version.war.plugin>2.5</version.war.plugin>
+    <version.ear.plugin>2.10</version.ear.plugin>
     <version.jboss.bom>8.2.1.Final</version.jboss.bom>
+
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
 
   <modules>
@@ -20,16 +25,35 @@
   </modules>
 
   <build>
-    <plugins>
-      <plugin>
-	<artifactId>maven-war-plugin</artifactId>
-	<version>${version.war.plugin}</version>
-	<configuration>
-          <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-	</configuration>
-      </plugin>
-    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.wildfly.plugins</groupId>
+          <artifactId>wildfly-maven-plugin</artifactId>
+          <version>${version.wildfly.maven.plugin}</version>
+          <inherited>true</inherited>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+
+	<plugin>
+	  <artifactId>maven-war-plugin</artifactId>
+	  <version>${version.war.plugin}</version>
+	  <configuration>
+            <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+	  </configuration>
+	</plugin>
+
+	<plugin>
+          <artifactId>maven-ear-plugin</artifactId>
+          <version>${version.ear.plugin}</version>
+	</plugin>
+
+      </plugins>
+    </pluginManagement>
   </build>
 
   <dependencyManagement>
