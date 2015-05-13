@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+     <f:view>
+        <h:form id="form1">
+          <h:outputText value="Enter Your Name:"/>
+          <h:inputText id="name"/>
+          <h:commandButton value="Submit" />
+        </h:form>
+        <h:outputText rendered="#{not empty request.getParameter('form1:name')}"
+                      value=" Hello #{request.getParameter('form1:name')}"/>
+     </f:view>
+
+</html>
