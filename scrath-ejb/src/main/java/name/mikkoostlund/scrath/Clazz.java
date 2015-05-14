@@ -1,0 +1,2 @@
+public class Clazz {
+}

@@ -38,11 +38,17 @@
   </build>
 
   <dependencies>
-    <!-- Depend on the war module so that we can package it -->
+    <!-- Depend on the war and ejb modules so that we can package them -->
     <dependency>
       <groupId>name.mikkoostlund.scrath</groupId>
       <artifactId>scrath-web</artifactId>
       <type>war</type>
+    </dependency>
+
+    <dependency>
+      <groupId>name.mikkoostlund.scrath</groupId>
+      <artifactId>scrath-ejb</artifactId>
+      <type>ejb</type>
     </dependency>
   </dependencies>
 
