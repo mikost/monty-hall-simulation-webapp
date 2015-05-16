@@ -13,14 +13,6 @@
   <artifactId>scrath-web</artifactId>
   <packaging>war</packaging>
 
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
   <dependencies>
     <dependency>
       <groupId>javax.inject</groupId>
