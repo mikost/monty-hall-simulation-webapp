@@ -27,7 +27,7 @@ public class SlsbTest {
                          .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
-    @Inject SlsBean sdd;
+    @Inject Slsb sdd;
 	
     @Test
     public final void testSayHiTo() {
