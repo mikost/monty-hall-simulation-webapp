@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>name.mikkoostlund.scrath</groupId>
     <artifactId>scrath-parent</artifactId>
@@ -16,14 +17,74 @@
   <build>
     <plugins>
       <plugin>
-	<artifactId>maven-ejb-plugin</artifactId>
+        <artifactId>maven-ejb-plugin</artifactId>
         <version>${version.ejb.plugin}</version>
         <configuration>
-          <ejbVersion>3.1</ejbVersion>
+          <ejbVersion>3.2</ejbVersion>
         </configuration>
       </plugin>
-    </plugins>
 
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.17</version> <!-- Use at least version 2.17 according to recommendation at http://arquillian.org/guides/getting_started -->
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>process-test-classes</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.wildfly</groupId>
+                  <artifactId>wildfly-dist</artifactId>
+                  <version>8.2.0.Final</version>
+                  <type>zip</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>target</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.jboss.spec.javax.ejb</groupId>
+      <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <!-- The version of this artifact is specified by
+           org.wildfly.bom:jboss-javaee-7.0-with-tools-->
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.arquillian.junit</groupId>
+      <artifactId>arquillian-junit-container</artifactId>
+      <!-- The version of this artifact is specified by
+           org.wildfly.bom:jboss-javaee-7.0-with-tools-->
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.wildfly</groupId>
+      <artifactId>wildfly-arquillian-container-managed</artifactId>
+      <!-- The version of this artifact is specified by
+           org.wildfly.bom:jboss-javaee-7.0-with-tools-->
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>

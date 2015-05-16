@@ -7,11 +7,11 @@
      <f:view>
         <h:form id="form1">
           <h:outputText value="Enter Your Name:"/>
-          <h:inputText id="name"/>
-          <h:commandButton value="Submit" />
+          <h:inputText value="#{backingBean.name}"/>
+          <h:commandButton value="Submit" action="#{backingBean.takeAction}"/>
         </h:form>
-        <h:outputText rendered="#{not empty request.getParameter('form1:name')}"
-                      value=" Hello #{request.getParameter('form1:name')}"/>
+        <h:outputText rendered="#{not empty backingBean.helloPhrase}"
+                      value="#{backingBean.helloPhrase}"/>
      </f:view>
 
 </html>

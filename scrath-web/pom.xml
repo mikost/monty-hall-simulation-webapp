@@ -16,10 +16,22 @@
   <build>
     <plugins>
       <plugin>
-	<artifactId>maven-war-plugin</artifactId>
-        <version>${version.war.plugin}</version>
+        <artifactId>maven-war-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
 
+  <dependencies>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>name.mikkoostlund.scrath</groupId>
+      <artifactId>scrath-ejb</artifactId>
+      <type>ejb</type>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 </project>
