@@ -6,6 +6,8 @@ import static org.junit.Assert.assertThat;
 
 import javax.inject.Inject;
 
+import name.mikkoostlund.scrath.domain.Myentity;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -24,7 +26,9 @@ public class SlsbTest {
                          .addClass(SlsbRemote.class)
                          .addClass(SlsbLocal.class)
                          .addClass(Slsb.class)
-                         .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                         .addClass(Myentity.class)
+                         .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+                         .addAsResource("persistence.xml", "META-INF/persistence.xml");
     }
 
     @Inject Slsb sdd;
