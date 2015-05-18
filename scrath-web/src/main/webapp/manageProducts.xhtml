@@ -5,11 +5,22 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
      <f:view>
+        <h:link value="Back to main menu" outcome="index.html"/>
         <h:form id="form1">
-          <h:outputText value="Enter Product Name:"/>
+          <h:outputText value="New product, name:"/>
           <h:inputText value="#{backingBean.name}"/>
-          <h:commandButton value="Submit" action="#{backingBean.takeAction}"/>
+          <h:commandButton value="Add" action="#{backingBean.takeAction}"/>
         </h:form>
+        <h:dataTable var="product" value="#{backingBean.products}" border="1">
+                <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{product.id}
+                </h:column>
+                <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        #{product.name}
+                </h:column>
+        </h:dataTable>
      </f:view>
 
 </html>

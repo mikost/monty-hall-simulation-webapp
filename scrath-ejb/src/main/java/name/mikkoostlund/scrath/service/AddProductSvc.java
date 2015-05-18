@@ -1,7 +1,9 @@
 package name.mikkoostlund.scrath.service;
 
+import java.util.List;
+
 import name.mikkoostlund.scrath.domain.Product;
 
 public interface AddProductSvc {
-	void add(Product product);
+    List<Product> add(Product product);
 }
