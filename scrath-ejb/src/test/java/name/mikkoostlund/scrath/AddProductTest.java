@@ -14,6 +14,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import name.mikkoostlund.scrath.domain.Product;
+import name.mikkoostlund.scrath.service.AddProductSvc;
+import name.mikkoostlund.scrath.service.AddProductSvcBean;
+import name.mikkoostlund.scrath.service.AddProductSvcLocal;
+import name.mikkoostlund.scrath.service.AddProductSvcRemote;
 
 import org.hamcrest.CoreMatchers;
 import org.jboss.arquillian.container.test.api.Deployment;

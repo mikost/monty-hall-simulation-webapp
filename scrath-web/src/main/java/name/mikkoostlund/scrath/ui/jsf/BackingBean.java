@@ -2,8 +2,8 @@ package name.mikkoostlund.scrath.ui.jsf;
 
 import javax.inject.Inject;
 
-import name.mikkoostlund.scrath.AddProductSvc;
 import name.mikkoostlund.scrath.domain.Product;
+import name.mikkoostlund.scrath.service.AddProductSvc;
 
 public class BackingBean {
 

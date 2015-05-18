@@ -1,4 +1,4 @@
-package name.mikkoostlund.scrath;
+package name.mikkoostlund.scrath.service;
 
 import name.mikkoostlund.scrath.domain.Product;
 

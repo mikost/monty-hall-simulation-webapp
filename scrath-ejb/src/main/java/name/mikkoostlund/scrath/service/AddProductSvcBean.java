@@ -1,4 +1,4 @@
-package name.mikkoostlund.scrath;
+package name.mikkoostlund.scrath.service;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
