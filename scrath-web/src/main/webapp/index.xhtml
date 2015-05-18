@@ -6,12 +6,10 @@
 
      <f:view>
         <h:form id="form1">
-          <h:outputText value="Enter Your Name:"/>
+          <h:outputText value="Enter Product Name:"/>
           <h:inputText value="#{backingBean.name}"/>
           <h:commandButton value="Submit" action="#{backingBean.takeAction}"/>
         </h:form>
-        <h:outputText rendered="#{not empty backingBean.helloPhrase}"
-                      value="#{backingBean.helloPhrase}"/>
      </f:view>
 
 </html>
