@@ -5,19 +5,17 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import name.mikkoostlund.scrath.domain.Myentity;
+import name.mikkoostlund.scrath.domain.Product;
 
 @Stateless
 @LocalBean
-public class SlsBean implements SlsbLocal, SlsbRemote {
+public class AddProductSvcBean implements AddProductSvcLocal, AddProductSvcRemote {
 
     @PersistenceContext
     EntityManager em;
 
     @Override
-    public String sayHiTo(String name) {
-        Myentity entity = new Myentity(name);
-        em.persist(entity);
-        return "Hi "+ name;
+        public void add(Product product) {
+        em.persist(product);
     }
 }

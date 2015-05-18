@@ -2,12 +2,13 @@ package name.mikkoostlund.scrath.ui.jsf;
 
 import javax.inject.Inject;
 
-import name.mikkoostlund.scrath.Slsb;
+import name.mikkoostlund.scrath.AddProductSvc;
+import name.mikkoostlund.scrath.domain.Product;
 
 public class BackingBean {
 
 	@Inject
-	Slsb slsb;
+	AddProductSvc addProductSvc;
 	private String helloPhrase;
 	private String name;
 
@@ -26,14 +27,9 @@ public class BackingBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public BackingBean() {
-		// TODO Auto-generated constructor stub
-	}
-
 	
 	public Object takeAction() {
-		setHelloPhrase(slsb.sayHiTo(name));
+		addProductSvc.add(new Product(name));
 		return null;
 	}
 }

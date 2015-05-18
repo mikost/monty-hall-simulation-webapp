@@ -6,18 +6,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Myentity {
+public class Product {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
     Long id;
 
-    String name;
+    private String name;
 
-    public Myentity() {
+    public Product() {
     }
 
-    public Myentity(String name) {
+    public Product(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 }
