@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import name.mikkoostlund.scrath.domain.InventoryLine;
 import name.mikkoostlund.scrath.domain.Product;
 import name.mikkoostlund.scrath.service.AddProductSvc;
 import name.mikkoostlund.scrath.service.AddProductSvcBean;
@@ -39,6 +40,7 @@ public class AddProductTest {
                          .addClass(AddProductSvcLocal.class)
                          .addClass(AddProductSvc.class)
                          .addClass(Product.class)
+                         .addClass(InventoryLine.class)
                          .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                          .addAsResource("persistence.xml", "META-INF/persistence.xml");
     }

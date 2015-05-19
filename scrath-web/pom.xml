@@ -20,6 +20,11 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+        <groupId>javax.enterprise</groupId>
+        <artifactId>cdi-api</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>name.mikkoostlund.scrath</groupId>
       <artifactId>scrath-ejb</artifactId>
       <type>ejb</type>

@@ -1,28 +1,23 @@
 package name.mikkoostlund.scrath.ui.jsf;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import name.mikkoostlund.scrath.domain.Product;
 import name.mikkoostlund.scrath.service.AddProductSvc;
 
+@RequestScoped
+@Named
 public class BackingBean {
 
     @Inject
     AddProductSvc addProductSvc;
-    private String helloPhrase;
+
     private String name;
-    private List<Product> products = new ArrayList<Product>();
-
-    public String getHelloPhrase() {
-        return helloPhrase;
-    }
-
-    public void setHelloPhrase(String helloPhrase) {
-        this.helloPhrase = helloPhrase;
-    }
+    private List<Product> products;
 
     public String getName() {
         return name;
@@ -33,17 +28,16 @@ public class BackingBean {
     }
     
     public List<Product> getProducts() {
+    	if (products == null) {
+    		products = addProductSvc.getAll();
+    	}
         return products;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public Object takeAction() {
+    public Object addNewProduct() {
         List<Product> allProducts = addProductSvc.add(new Product(name));
-        setProducts(allProducts);
-        setName("");
+        this.products = allProducts;
+        this.name = "";
         return null;
     }
 }

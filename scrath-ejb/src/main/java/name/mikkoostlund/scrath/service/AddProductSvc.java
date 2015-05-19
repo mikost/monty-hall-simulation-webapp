@@ -6,4 +6,6 @@ import name.mikkoostlund.scrath.domain.Product;
 
 public interface AddProductSvc {
     List<Product> add(Product product);
+
+    List<Product> getAll();
 }
