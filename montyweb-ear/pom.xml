@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>name.mikkoostlund.montyweb</groupId>
+    <artifactId>montyweb-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>montyweb-ear</artifactId>
+  <packaging>ear</packaging>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-ear-plugin</artifactId>
+        <configuration>
+          <!-- Tell Maven we are using Java EE 7 -->
+          <version>7</version>
+          <defaultLibBundleDir>lib</defaultLibBundleDir>
+          <fileNameMapping>no-version</fileNameMapping>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-maven-plugin</artifactId>
+        <configuration>
+          <filename>${project.artifactId}.ear</filename>
+          <skip>false</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <!-- Depend on the war and ejb modules so that we can package them -->
+    <dependency>
+      <groupId>name.mikkoostlund.montyweb</groupId>
+      <artifactId>montyweb-web</artifactId>
+      <type>war</type>
+    </dependency>
+
+    <dependency>
+      <groupId>name.mikkoostlund.montyweb</groupId>
+      <artifactId>montyweb-ejb</artifactId>
+      <type>ejb</type>
+    </dependency>
+  </dependencies>
+
+</project>

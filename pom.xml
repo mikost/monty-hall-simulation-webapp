@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>name.mikkoostlund.scrath</groupId>
-  <artifactId>scrath-parent</artifactId>
+  <groupId>name.mikkoostlund.montyweb</groupId>
+  <artifactId>montyweb-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -23,9 +23,9 @@
   </properties>
 
   <modules>
-    <module>scrath-ear</module>
-    <module>scrath-web</module>
-    <module>scrath-ejb</module>
+    <module>montyweb-ear</module>
+    <module>montyweb-web</module>
+    <module>montyweb-ejb</module>
   </modules>
 
   <build>
@@ -66,16 +66,16 @@
       <!-- Define the version of the WAR so that we don't need to repeat 
            ourselves in every module -->
       <dependency>
-        <groupId>name.mikkoostlund.scrath</groupId>
-        <artifactId>scrath-web</artifactId>
+        <groupId>name.mikkoostlund.montyweb</groupId>
+        <artifactId>montyweb-web</artifactId>
         <version>${project.version}</version>
         <type>war</type>
         <scope>compile</scope>
       </dependency>
 
       <dependency>
-        <groupId>name.mikkoostlund.scrath</groupId>
-        <artifactId>scrath-ejb</artifactId>
+        <groupId>name.mikkoostlund.montyweb</groupId>
+        <artifactId>montyweb-ejb</artifactId>
         <version>${project.version}</version>
         <type>ejb</type>
         <scope>compile</scope>
