@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+  <h:head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <h:outputStylesheet name="styles.css" library="css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </h:head>
+  <h:body>
+    <div class="container">
+      <h1>Monty Hall simulation</h1>
+      <p>Fill in how many times you want to run the show, how many doors there shall be and what kinds of contestants you want in the shows!</p>
+      <h:form styleClass="form">
+        <div class="row">
+          <div class="col-md-4">
+            <h:outputLabel value="Number of runs: " for="numberOfRuns"/>
+          </div>
+          <div class="col-md-8">
+            <h:inputText id="numberOfRuns" value="#{simulationFormBean.numberOfRuns}" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h:outputLabel value="Number of doors: " for="numberOfDoors"/>
+          </div>
+          <div class="col-md-8">
+            <h:inputText id="numberOfDoors" value="#{simulationFormBean.numberOfDoors}" />
+          </div>
+        </div>
+        Include the following types of contestants:
+        <h:panelGroup layout="block" id="container3">
+          <h:selectManyCheckbox value="#{simulationFormBean.selections}" layout="pageDirection">
+            <f:selectItems value="#{simulationFormBean.options}"/>
+          </h:selectManyCheckbox>
+        </h:panelGroup>    
+        <h:commandButton action="#{simulationFormBean.runSimulation}" value="Run simulation"/>
+      </h:form>
+    </div>
+  </h:body> 
+</html>

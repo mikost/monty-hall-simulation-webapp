@@ -1,0 +1,2 @@
+INSERT INTO SHOWCONTESTANT values ('Keeping', 1);
+INSERT INTO SHOWCONTESTANT values ('Switching', 2);

@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+.form {
+  border-style: solid; border-width: thin; border-color: red; padding: 15px; border-radius: 5px;
+}
