@@ -85,8 +85,8 @@
         <groupId>org.wildfly.bom</groupId>
         <artifactId>jboss-javaee-7.0-with-tools</artifactId>
         <version>${version.jboss.bom}</version>
-	<scope>import</scope>
-	<type>pom</type>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
     </dependencies>
   </dependencyManagement>
