@@ -6,9 +6,10 @@
 
 <h:head></h:head> 
 <h:body> 
-	<h:outputText value="The simulation was run #{montyBean.showCount} times."/>
-	<h:dataTable var="contestantResult" value="#{montyBean.contestantResults}">
-		<h:column>Using the &quot;#{contestantResult.name}&quot;, the contestant won #{contestantResult.timesWon} times.</h:column>
+	<h:outputText value="The simulation was run #{simulationFormBean.simulationResult.numberOfRuns} times."/>
+	<h:dataTable var="contestantResult" value="#{simulationFormBean.simulationResult.contestantResults}">
+		<h:column>Using the &quot;#{contestantResult.showContestant.description}&quot;, the contestant won #{contestantResult.timesWon} times.</h:column>
 	</h:dataTable>
+	<p><h:outputLink value="simulationForm.jsf">Back to simulation form</h:outputLink></p>
 </h:body> 
 </html>

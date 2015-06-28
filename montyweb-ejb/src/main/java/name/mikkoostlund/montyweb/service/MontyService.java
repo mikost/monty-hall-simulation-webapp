@@ -31,7 +31,7 @@ public class MontyService {
         return em.createQuery("FROM ShowContestant", ShowContestant.class).getResultList();
     }
 
-    public void runSimulation(int numberOfRuns, int numberOfDoors, int numberOfCars, Set<ShowContestant> showContestants) {
+    public SimulationResult runSimulation(int numberOfRuns, int numberOfDoors, int numberOfCars, Set<ShowContestant> showContestants) {
         MontyExperiment montyExperiment = new MontyExperiment(new DefaultShowImpl(numberOfDoors), numberOfRuns, showContestants);
         ShowStatistics showStatistics = montyExperiment.run();
         Set<ContestantResult> contestantResults = new HashSet<>();
@@ -42,5 +42,6 @@ public class MontyService {
         }
         SimulationResult simulationResult = new SimulationResult(numberOfRuns, numberOfDoors, numberOfCars, contestantResults);
         em.persist(simulationResult);
+        return simulationResult;
     }
 }

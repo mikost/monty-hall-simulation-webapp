@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import name.mikkoostlund.montyweb.domain.montyhallsimulation.ShowContestant;
+import name.mikkoostlund.montyweb.domain.montyhallsimulation.SimulationResult;
 import name.mikkoostlund.montyweb.service.MontyService;
 
 @Named
@@ -44,6 +45,8 @@ public class SimulationFormBean {
     private int numberOfDoors = 3;
     private int numberOfCars = 1;
     private List<String> selections;
+
+    private SimulationResult simulationResult;
 
     public int getNumberOfRuns() {
         return numberOfRuns;
@@ -77,11 +80,16 @@ public class SimulationFormBean {
         this.selections = selections;
     }
 
-    public void runSimulation() {
+    public String runSimulation() {
         Set<ShowContestant> showContestantTypes = new HashSet<>();
         for (String selection : selections) {
             showContestantTypes.add(allShowContestantTypes.get(selection));
         }
-        montyService.runSimulation(numberOfRuns, numberOfDoors, numberOfCars, showContestantTypes);
+        simulationResult = montyService.runSimulation(numberOfRuns, numberOfDoors, numberOfCars, showContestantTypes);
+        return "montyhall";
+    }
+
+    public SimulationResult getSimulationResult() {
+        return simulationResult;
     }
 }
