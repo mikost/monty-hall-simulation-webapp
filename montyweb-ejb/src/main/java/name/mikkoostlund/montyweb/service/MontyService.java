@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import name.mikkoostlund.montyweb.domain.montyhallsimulation.ContestantResult;
+import name.mikkoostlund.montyweb.domain.montyhallsimulation.DefaultShowHelper;
 import name.mikkoostlund.montyweb.domain.montyhallsimulation.DefaultShowImpl;
 import name.mikkoostlund.montyweb.domain.montyhallsimulation.MontyExperiment;
 import name.mikkoostlund.montyweb.domain.montyhallsimulation.MontyExperiment.ShowStatistics;
@@ -31,8 +32,8 @@ public class MontyService {
         return em.createQuery("FROM ShowContestant", ShowContestant.class).getResultList();
     }
 
-    public SimulationResult runSimulation(int numberOfRuns, int numberOfDoors, int numberOfCars, Set<ShowContestant> showContestants) {
-        MontyExperiment montyExperiment = new MontyExperiment(new DefaultShowImpl(numberOfDoors), numberOfRuns, showContestants);
+    public SimulationResult runSimulation(int numberOfRuns, int numberOfDoors, Set<ShowContestant> showContestants) {
+        MontyExperiment montyExperiment = new MontyExperiment(new DefaultShowImpl(new DefaultShowHelper(numberOfDoors)), numberOfRuns, showContestants);
         ShowStatistics showStatistics = montyExperiment.run();
         Set<ContestantResult> contestantResults = new HashSet<>();
         for (ShowContestant showContestant : showContestants) {
@@ -40,7 +41,7 @@ public class MontyService {
             em.persist(contestantResult);
             contestantResults.add(contestantResult);
         }
-        SimulationResult simulationResult = new SimulationResult(numberOfRuns, numberOfDoors, numberOfCars, contestantResults);
+        SimulationResult simulationResult = new SimulationResult(numberOfRuns, numberOfDoors, contestantResults);
         em.persist(simulationResult);
         return simulationResult;
     }

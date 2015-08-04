@@ -8,9 +8,9 @@ package name.mikkoostlund.montyweb.domain.montyhallsimulation;
  */
 public interface ShowHelper {
 
-	/**
-	 * @return an instance of type {@link Doors}</a>
-	 */
-	Doors setupDoors(int numberOfDoors);
+    /**
+     * @return an instance of type {@link Doors}</a>
+     */
+    Doors setupDoors();
 
 }

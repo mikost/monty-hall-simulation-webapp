@@ -1,5 +1,29 @@
 @CHARSET "UTF-8";
 
+#body {
+	height: calc(100% - 70px - 70px - 30px);
+    border-style: solid; border-width: thin; border-color: red; padding: 15px; border-radius: 5px;
+    min-height: 450px;
+}
+
+.container-main {
+	border: 1px solid black;
+	border-radius: 10px;
+	min-height: 500px;
+}
+
+.bodyh1 {
+	font-size: 1.2em;
+}
+
+.bodyp {
+	font-size: 14px;
+}
+
 .form {
-  border-style: solid; border-width: thin; border-color: red; padding: 15px; border-radius: 5px;
+	background-color: #EEEEEE;
+	margin: 15px;
+	padding: 15px;
+	border: 1px solid black;
+	border-radius: 10px;
 }

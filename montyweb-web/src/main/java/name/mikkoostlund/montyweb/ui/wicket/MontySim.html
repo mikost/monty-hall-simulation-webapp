@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+<meta charset="UTF-8">
+<title>Monty Hall simulation</title>
+</head>
+<body>
+  <wicket:extend>
+    <p><wicket:message key="tab.introduction.text">In this tab...</wicket:message></p>
+    <form wicket:id="simForm" class="form">
+      <div class="row">
+        <div class="col-md-5">
+          <label for="numberOfRuns"><wicket:message key="label.number.of.shows">Number of shows to simulate...</wicket:message>:</label> 
+        </div>
+        <div class="col-md-7">
+          <input type="text" wicket:id="numberOfRuns" id="numberOfRuns" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label for="numberOfDoors"><wicket:message key="label.number.of.doors">Number of doors</wicket:message>:</label>
+        </div>
+        <div class="col-md-7">
+          <input type="text" wicket:id="numberOfDoors" id="numberOfDoors" />
+        </div>
+      </div>
+      <label for="contestantSelections"><wicket:message key="label.contestant.selections">Include the following types of contestants</wicket:message>:</label>
+      <div wicket:id="contestantSelections">
+        <div wicket:id="contestantOptions">
+          <input wicket:id="selected" id="selected" type="checkbox"/><label wicket:id="description" for="selected">Description of contestant type</label>
+        </div>
+      </div>  
+      <input type="submit" value="Run simulation" wicket:message="value:submit.simulation.form" />
+    </form>
+    <div wicket:id="feedback"></div>
+  </wicket:extend>
+</body>
+</html>

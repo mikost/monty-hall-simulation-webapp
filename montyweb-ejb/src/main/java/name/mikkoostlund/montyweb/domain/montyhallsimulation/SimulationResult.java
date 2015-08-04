@@ -17,7 +17,6 @@ public class SimulationResult {
 
     private long numberOfRuns;
     private long numberOfDoors;
-    private long numberOfCars;
 
     @OneToMany
     private Set<ContestantResult> contestantResults;
@@ -25,10 +24,9 @@ public class SimulationResult {
     protected SimulationResult() {
     }
 
-    public SimulationResult(long numberOfRuns, long numberOfDoors, long numberOfCars, Set<ContestantResult> contestantResults) {
+    public SimulationResult(long numberOfRuns, long numberOfDoors, Set<ContestantResult> contestantResults) {
         this.numberOfRuns = numberOfRuns;
         this.numberOfDoors = numberOfDoors;
-        this.numberOfCars = numberOfCars;
         this.contestantResults = contestantResults;
     }
 
@@ -38,10 +36,6 @@ public class SimulationResult {
 
     public long getNumberOfDoors() {
         return numberOfDoors;
-    }
-
-    public long getNumberOfCars() {
-        return numberOfCars;
     }
 
     public Set<ContestantResult> getContestantResults() {
