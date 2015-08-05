@@ -1,2 +1,3 @@
-# Scrath1
-Nothing special
+# Monty Hall Problem web app
+About the Monty Hall Problem.
+
