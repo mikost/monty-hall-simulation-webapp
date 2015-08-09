@@ -5,10 +5,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+import org.apache.wicket.authroles.authentication.pages.SignInPage;
 import org.apache.wicket.cdi.CdiConfiguration;
-import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.markup.html.WebPage;
  
-public class MontyWicketApplication extends WebApplication {
+public class MontyWicketApplication extends AuthenticatedWebApplication {
 
     @Override  
     public void init() {
@@ -27,6 +30,16 @@ public class MontyWicketApplication extends WebApplication {
     @Override
     public Class<? extends Page> getHomePage() {
         return MontyMain.class;
+    }
+
+    @Override
+    protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
+        return MontyWebSession.class;
+    }
+
+    @Override
+    protected Class<? extends WebPage> getSignInPageClass() {
+        return SignInPage.class;
     }
 }
 

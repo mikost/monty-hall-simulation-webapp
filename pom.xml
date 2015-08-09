@@ -101,6 +101,11 @@
         <artifactId>wicket-cdi</artifactId>  
         <version>${version.wicket}</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.wicket</groupId>
+        <artifactId>wicket-auth-roles</artifactId>
+        <version>${version.wicket}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 </project>

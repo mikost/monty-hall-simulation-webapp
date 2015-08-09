@@ -62,6 +62,8 @@ public abstract class MontyTemplate extends WebPage {
             }
         });
 
+        add(new SignInWidget("signin-widget"));
+
         List<Link> linkList = Arrays.asList(
                 Link.of(new ResourceModel("label.introduction"), MontyMain.class),
                 Link.of(new ResourceModel("label.simulation"),   MontySim.class)
