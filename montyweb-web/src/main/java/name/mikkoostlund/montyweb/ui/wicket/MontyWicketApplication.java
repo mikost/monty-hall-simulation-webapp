@@ -18,7 +18,10 @@ public class MontyWicketApplication extends WebApplication {
             manager = (BeanManager) new InitialContext().lookup("java:comp/BeanManager");  
         } catch (NamingException e) {  
         }  
-        new CdiConfiguration(manager).configure(this);  
+        new CdiConfiguration(manager).configure(this);
+
+        this.mountPage("introduction", MontyMain.class);
+        this.mountPage("simulation", MontySim.class);
     }  
 
     @Override
