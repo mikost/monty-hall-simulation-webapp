@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,10 +22,14 @@ public class SimulationResult {
     @OneToMany
     private Set<ContestantResult> contestantResults;
 
+    @ManyToOne
+    private User user;
+
     protected SimulationResult() {
     }
 
-    public SimulationResult(long numberOfRuns, long numberOfDoors, Set<ContestantResult> contestantResults) {
+    public SimulationResult(User user, long numberOfRuns, long numberOfDoors, Set<ContestantResult> contestantResults) {
+        this.user = user;
         this.numberOfRuns = numberOfRuns;
         this.numberOfDoors = numberOfDoors;
         this.contestantResults = contestantResults;

@@ -9,6 +9,17 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <repositories>
+    <repository>
+      <id>jboss-releases</id>
+      <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+    </repository>
+    <repository>
+      <id>jboss-thirdparty-releases</id>
+      <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
+    </repository>
+  </repositories>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -17,6 +28,9 @@
     <version.ejb.plugin>2.3</version.ejb.plugin>
     <version.ear.plugin>2.10</version.ear.plugin>
     <version.jboss.bom>8.2.1.Final</version.jboss.bom>
+    <version.slf4j>1.7.2.jbossorg-1</version.slf4j>
+    <version.hibernate>4.3.7.Final</version.hibernate>
+    <version.picketbox>4.0.21.Final</version.picketbox>
     <version.wicket>7.0.0-M6</version.wicket>
 
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -91,6 +105,12 @@
       </dependency>
 
       <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${version.slf4j}</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.apache.wicket</groupId>
         <artifactId>wicket-core</artifactId>
         <version>${version.wicket}</version>
@@ -101,10 +121,23 @@
         <artifactId>wicket-cdi</artifactId>  
         <version>${version.wicket}</version>
       </dependency>
+
       <dependency>
         <groupId>org.apache.wicket</groupId>
         <artifactId>wicket-auth-roles</artifactId>
         <version>${version.wicket}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${version.hibernate}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.picketbox</groupId>
+        <artifactId>picketbox</artifactId>
+        <version>${version.picketbox}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
