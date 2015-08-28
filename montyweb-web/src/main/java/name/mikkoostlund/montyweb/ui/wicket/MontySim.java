@@ -1,5 +1,6 @@
 package name.mikkoostlund.montyweb.ui.wicket;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import name.mikkoostlund.montyweb.domain.montyhallsimulation.ContestantResult;
 import name.mikkoostlund.montyweb.domain.montyhallsimulation.ShowContestant;
 import name.mikkoostlund.montyweb.domain.montyhallsimulation.SimulationResult;
 import name.mikkoostlund.montyweb.service.MontyService;
+import name.mikkoostlund.montyweb.service.TableSimulationResult;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
@@ -32,6 +34,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.validation.IValidatable;
@@ -48,7 +51,7 @@ public class MontySim extends MontyTemplate {
 	private Integer numberOfDoors = null;
 	private final List<String> contestantSelections = new ArrayList<>();
 
-	private DefaultDataTable<SimulationResult, String> table;
+	private DefaultDataTable<TableSimulationResult, String> table;
 
 	public MontySim(PageParameters pageParameters) {
 		super(pageParameters);
@@ -138,16 +141,20 @@ public class MontySim extends MontyTemplate {
 
 		this.add(new FeedbackPanel("feedback"));
 
-		List<PropertyColumn<SimulationResult, String>> columns = new ArrayList<>();
-		columns.add(new PropertyColumn<SimulationResult, String>(new Model<>(
-				"Time"), "time", "time"));
-		columns.add(new PropertyColumn<SimulationResult, String>(new Model<>(
-				"NumberOfRuns"), "numberOfRuns", "numberOfRuns"));
-		columns.add(new PropertyColumn<SimulationResult, String>(new Model<>(
-				"NumberOfDoors"), "numberOfDoors", "numberOfDoors"));
-		ISortableDataProvider<SimulationResult, String> resultProvider = new ResultProvider();
-		table = new DefaultDataTable<SimulationResult, String>("datatable",
-				columns, resultProvider, 10);
+		List<PropertyColumn<TableSimulationResult, String>> columns = new ArrayList<>();
+		columns.add(new PropertyColumn<TableSimulationResult, String>(
+				new Model<>("Time"), "time", "time"));
+		columns.add(new PropertyColumn<TableSimulationResult, String>(
+				new Model<>("NumberOfRuns"), "numberOfRuns", "numberOfRuns"));
+		columns.add(new PropertyColumn<TableSimulationResult, String>(
+				new Model<>("NumberOfDoors"), "numberOfDoors", "numberOfDoors"));
+		columns.add(new PropertyColumn<TableSimulationResult, String>(
+				new Model<>("Switch wins"), "switchingWins", "switchingWins"));
+		columns.add(new PropertyColumn<TableSimulationResult, String>(
+				new Model<>("Keep wins"), "keepingWins", "keepingWins"));
+		ISortableDataProvider<TableSimulationResult, String> resultProvider = new ResultProvider();
+		table = new DefaultDataTable<TableSimulationResult, String>(
+				"datatable", columns, resultProvider, 10);
 		add(table);
 	}
 
@@ -158,62 +165,53 @@ public class MontySim extends MontyTemplate {
 				.contains("uzers"));
 	}
 
-	class ResultProvider extends SortableDataProvider<SimulationResult, String> {
+	class ResultProvider extends
+			SortableDataProvider<TableSimulationResult, String> {
 		int callCounter = 0;
 
+		private class SortableDataProviderComparator implements
+				Comparator<TableSimulationResult>, Serializable {
+
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			public int compare(final TableSimulationResult o1,
+					final TableSimulationResult o2) {
+				final String property = getSort().getProperty();
+				if (property == null) {
+					return -1;
+				}
+				PropertyModel<Comparable> model1 = new PropertyModel<Comparable>(
+						o1, property);
+				PropertyModel<Comparable> model2 = new PropertyModel<Comparable>(
+						o2, property);
+				Comparable value1 = model1.getObject();
+				Comparable value2 = model2.getObject();
+				if (value1 == null) {
+					return 1;
+				}
+				if (value2 == null) {
+					return -1;
+				}
+				int result = value1.compareTo(value2);
+
+				if (!getSort().isAscending()) {
+					result = -result;
+				}
+
+				return result;
+			}
+		}
+
 		@Override
-		public Iterator<? extends SimulationResult> iterator(long first,
+		public Iterator<? extends TableSimulationResult> iterator(long first,
 				long count) {
 			System.out.println("*** " + (++callCounter) + ": (" + first + "->"
 					+ (first + count) + ") " + stringMe());
-			List<SimulationResult> simulationResults = service
+			List<TableSimulationResult> simulationResults = service
 					.getSimulationResults();
 
 			if (getSort() != null) {
 				Collections.sort(simulationResults,
-						new Comparator<SimulationResult>() {
-
-							@Override
-							public int compare(SimulationResult o1,
-									SimulationResult o2) {
-								int dir = getSort().isAscending() ? 1 : -1;
-								if ("time".equals(getSort().getProperty())) {
-									if (o1.getTime() < o2.getTime()) {
-										return -dir;
-									}
-									if (o1.getTime() > o2.getTime()) {
-										return dir;
-									}
-									return 0;
-								}
-								if ("numberOfRuns".equals(getSort()
-										.getProperty())) {
-									if (o1.getNumberOfRuns() < o2
-											.getNumberOfRuns()) {
-										return -dir;
-									}
-									if (o1.getNumberOfRuns() > o2
-											.getNumberOfRuns()) {
-										return dir;
-									}
-									return 0;
-								}
-								if ("numberOfDoors".equals(getSort()
-										.getProperty())) {
-									if (o1.getNumberOfDoors() < o2
-											.getNumberOfDoors()) {
-										return -dir;
-									}
-									if (o1.getNumberOfDoors() > o2
-											.getNumberOfDoors()) {
-										return dir;
-									}
-									return 0;
-								}
-								return 0;
-							}
-
-						});
+						new SortableDataProviderComparator());
 			}
 			return simulationResults
 					.subList((int) first, (int) (first + count)).iterator();
@@ -230,13 +228,13 @@ public class MontySim extends MontyTemplate {
 		}
 
 		@Override
-		public IModel<SimulationResult> model(SimulationResult simulationResult) {
-			return new LoadableDetachableModel<SimulationResult>(
+		public IModel<TableSimulationResult> model(
+				TableSimulationResult simulationResult) {
+			return new LoadableDetachableModel<TableSimulationResult>(
 					simulationResult) {
 
 				@Override
-				protected SimulationResult load() {
-					// TODO Auto-generated method stub
+				protected TableSimulationResult load() {
 					return null;
 				}
 			};
