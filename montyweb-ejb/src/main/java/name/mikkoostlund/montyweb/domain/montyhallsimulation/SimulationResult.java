@@ -1,5 +1,6 @@
 package name.mikkoostlund.montyweb.domain.montyhallsimulation;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,39 +12,47 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class SimulationResult {
-        
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO) 
-    private long id;
 
-    private long numberOfRuns;
-    private long numberOfDoors;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 
-    @OneToMany
-    private Set<ContestantResult> contestantResults;
+	private long time;
 
-    @ManyToOne
-    private User user;
+	@ManyToOne
+	private User user;
 
-    protected SimulationResult() {
-    }
+	private long numberOfRuns;
+	private long numberOfDoors;
 
-    public SimulationResult(User user, long numberOfRuns, long numberOfDoors, Set<ContestantResult> contestantResults) {
-        this.user = user;
-        this.numberOfRuns = numberOfRuns;
-        this.numberOfDoors = numberOfDoors;
-        this.contestantResults = contestantResults;
-    }
+	@OneToMany
+	private Set<ContestantResult> contestantResults;
 
-    public long getNumberOfRuns() {
-        return numberOfRuns;
-    }
+	protected SimulationResult() {
+	}
 
-    public long getNumberOfDoors() {
-        return numberOfDoors;
-    }
+	public SimulationResult(User user, long numberOfRuns, long numberOfDoors,
+			Set<ContestantResult> contestantResults) {
+		this.time = new Date().getTime();
+		this.user = user;
+		this.numberOfRuns = numberOfRuns;
+		this.numberOfDoors = numberOfDoors;
+		this.contestantResults = contestantResults;
+	}
 
-    public Set<ContestantResult> getContestantResults() {
-        return contestantResults;
-    }
+	public long getTime() {
+		return time;
+	}
+
+	public long getNumberOfRuns() {
+		return numberOfRuns;
+	}
+
+	public long getNumberOfDoors() {
+		return numberOfDoors;
+	}
+
+	public Set<ContestantResult> getContestantResults() {
+		return contestantResults;
+	}
 }
