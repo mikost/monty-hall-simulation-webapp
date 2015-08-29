@@ -1,10 +1,13 @@
 package name.mikkoostlund.montyweb.ui.wicket;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -142,8 +145,27 @@ public class MontySim extends MontyTemplate {
 		this.add(new FeedbackPanel("feedback"));
 
 		List<PropertyColumn<TableSimulationResult, String>> columns = new ArrayList<>();
-		columns.add(new PropertyColumn<TableSimulationResult, String>(
-				new Model<>("Time"), "time", "time"));
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, MontyWebSession.get().getLocale());
+
+		columns.add(new PropertyColumn<TableSimulationResult, String>(new Model<>("Time"), "time", "time") {
+			@Override
+			public IModel<?> getDataModel(IModel<TableSimulationResult> rowModel)
+			{
+				
+				return new org.apache.wicket.model.AbstractReadOnlyModel() {
+					@Override
+					public String getObject() {
+						TableSimulationResult tsr = rowModel.getObject();
+						long time = tsr.getTime();
+						Date date = new Date(time);
+						DateFormat df = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, MontyWebSession.get().getLocale());
+						return df.format(date);
+					}
+				};
+			}
+
+		});
+
 		columns.add(new PropertyColumn<TableSimulationResult, String>(
 				new Model<>("NumberOfRuns"), "numberOfRuns", "numberOfRuns"));
 		columns.add(new PropertyColumn<TableSimulationResult, String>(
@@ -204,8 +226,6 @@ public class MontySim extends MontyTemplate {
 		@Override
 		public Iterator<? extends TableSimulationResult> iterator(long first,
 				long count) {
-			System.out.println("*** " + (++callCounter) + ": (" + first + "->"
-					+ (first + count) + ") " + stringMe());
 			List<TableSimulationResult> simulationResults = service
 					.getSimulationResults();
 
